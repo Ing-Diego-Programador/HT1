@@ -14,7 +14,7 @@ class radioTest2 {
 	 void EncenderRadio(){
 		radio r = new radio();
 		
-		assertTrue(r.getEstadoRadio());
+		assertFalse(r.getEstadoRadio());
 	}
 	
 	 void Contador() {

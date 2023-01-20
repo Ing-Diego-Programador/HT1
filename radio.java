@@ -14,7 +14,8 @@ public class radio implements iRadio{
 	
 	private ArrayList<emisora> AM = new ArrayList<>();
     private ArrayList<emisora> FM = new ArrayList<>();
-    private ArrayList<emisora> arrayEmisorasGuardadas = new ArrayList<>();
+    //private ArrayList<emisora> arrayEmisorasGuardadas = new ArrayList<>();
+    private emisora[] arrayEmisorasGuardadas = new emisora[11];
     
     emisora emisoraActual = new emisora("LO MEJOR", "AM", 530);
 
@@ -101,7 +102,11 @@ public class radio implements iRadio{
 	public void guardarEmisora() {
 		if(estadoRadio == true) {
 			if(contGuardado <= 12) {
-				arrayEmisorasGuardadas.add(emisoraActual);
+				
+				emisora nuevoGuardado = new emisora(emisoraActual.getNombreEmisora(), emisoraActual.getFrecuenciaEmisora(), emisoraActual.getNumeroEmisora());
+				
+				arrayEmisorasGuardadas[contGuardado] = nuevoGuardado;
+				
 				JOptionPane.showMessageDialog(null, "Esta emisora se almaceno en el espacio: No." + contGuardado);
 				contGuardado += 1;
 			}else {
@@ -118,16 +123,10 @@ public class radio implements iRadio{
 		
 		if(estadoRadio == true) {
 			int nGuardada = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la opción deseada"));
-			if(nGuardada < arrayEmisorasGuardadas.size()) {
-				emisoraActual.setNombreEmisora(arrayEmisorasGuardadas.get(nGuardada).getNombreEmisora());
-				emisoraActual.setFrecuenciaEmisora(arrayEmisorasGuardadas.get(nGuardada).getFrecuenciaEmisora());
-				emisoraActual.setNumeroEmisora(arrayEmisorasGuardadas.get(nGuardada).getNumeroEmisora());
-				
-		        for (int i = 0; i < arrayEmisorasGuardadas.size(); i++) {
-		        	//System.out.println(arrayEmisorasGuardadas.get(i).getNombreEmisora());
-		        }
-				
-
+			if(nGuardada < arrayEmisorasGuardadas.length) {
+				emisoraActual.setNombreEmisora(arrayEmisorasGuardadas[nGuardada].getNombreEmisora());
+				emisoraActual.setFrecuenciaEmisora(arrayEmisorasGuardadas[nGuardada].getFrecuenciaEmisora());
+				emisoraActual.setNumeroEmisora(arrayEmisorasGuardadas[nGuardada].getNumeroEmisora());
 				JOptionPane.showMessageDialog(null, "Tu emisora se cargo correctamente");	
 			}else {
 				JOptionPane.showMessageDialog(null, "No hay registros en ese espacio");
